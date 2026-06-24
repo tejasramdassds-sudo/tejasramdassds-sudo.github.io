@@ -276,6 +276,24 @@ h3 {
   font-size: 1.08rem;
 }
 
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.link-grid a {
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--green);
+  font-weight: 700;
+}
+
 .legal-page {
   max-width: 980px;
 }
@@ -487,7 +505,8 @@ h3 {
 
   .theme-grid,
   .work-list,
-  .course-grid {
+  .course-grid,
+  .link-grid {
     grid-template-columns: 1fr;
   }
 
