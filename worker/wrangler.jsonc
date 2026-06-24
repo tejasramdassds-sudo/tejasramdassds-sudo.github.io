@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tejas-website-event-logger",
+  "main": "src/index.js",
+  "compatibility_date": "2026-06-24",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "tejas-website-events",
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
+    }
+  ]
+}

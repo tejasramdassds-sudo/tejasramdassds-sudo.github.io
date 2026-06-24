@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Academic website for Tejas Ramdas, PhD candidate in Management and Statistics at Cornell University.">
     <title>Tejas Ramdas</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
@@ -34,8 +35,8 @@
           <h1 id="hero-title">Tejas Ramdas</h1>
           <p class="dek">PhD candidate in Management and Statistics studying strategy, technology and innovation, organizational economics, networks, computational social science, machine learning, AI, and econometrics.</p>
           <div class="hero-actions" aria-label="Contact links">
-            <a class="button primary" href="mailto:tr336@cornell.edu">Email</a>
-            <a class="button secondary" href="#writing">Selected Work</a>
+            <a class="button primary" href="mailto:tr336@cornell.edu" data-track="click_email" data-track-target="hero_email">Email</a>
+            <a class="button secondary" href="#writing" data-track="click_section_jump" data-track-target="selected_work">Selected Work</a>
           </div>
         </div>
       </section>
@@ -77,33 +78,33 @@
           <h2>Publications and Working Papers</h2>
         </div>
         <div class="work-list">
-          <article class="work-item featured">
+          <article class="work-item featured" data-track="paper_interest" data-track-target="generative_inventions_search_incursions">
             <div class="work-meta">Working paper</div>
             <h3>Generative Inventions and Search Incursions: Technological Proximity and the Nature of Follow-On Inventive Activity</h3>
             <p>With Gautam Ahuja. Examines how firms use generative inventions to move into knowledge domains associated with other firms' prior strengths.</p>
             <p class="status">Draft available upon request.</p>
           </article>
-          <article class="work-item">
+          <article class="work-item" data-track="paper_interest" data-track-target="sequential_entry_appropriation">
             <div class="work-meta">Working paper</div>
             <h3>Sequential Entry and Appropriation in Enabling Technologies</h3>
             <p>With Gautam Ahuja.</p>
           </article>
-          <article class="work-item">
+          <article class="work-item" data-track="paper_interest" data-track-target="bcorp_certification_customer_ratings">
             <div class="work-meta">Revise and resubmit, AMJ</div>
             <h3>Substantive and Subjective: A Multi-Method Investigation of B Corp Certification on Customer Ratings</h3>
             <p>With Kunyuan Qiao, Wesley David Sine, and Mary Ross.</p>
           </article>
-          <article class="work-item">
+          <article class="work-item" data-track="paper_interest" data-track-target="demand_for_executive_skills">
             <div class="work-meta">NBER Working Paper 28959</div>
             <h3>The Demand for Executive Skills</h3>
             <p>With Joseph Fuller, Stephen Hansen, and Raffaella Sadun.</p>
           </article>
-          <article class="work-item">
+          <article class="work-item" data-track="paper_interest" data-track-target="century_of_management_ideas">
             <div class="work-meta">Harvard Business Review, 2022</div>
             <h3>Visualizing a Century of Management Ideas</h3>
             <p>With Nicholas Bloom and Raffaella Sadun.</p>
           </article>
-          <article class="work-item">
+          <article class="work-item" data-track="paper_interest" data-track-target="statistics_computational_social_science">
             <div class="work-meta">Statistics and computational social science</div>
             <h3>Bellwether Trades; The Genesis of Constitutions; Spontaneous Coordination in LLM Collectives</h3>
             <p>Projects with Martin T. Wells, Patrick Huang, Nuno Garoupa, Yun-chien Chang, Tom Ginsburg, and Michael W. Macy.</p>
@@ -172,13 +173,16 @@
           <h2>Tejas Ramdas</h2>
           <p>PhD Candidate in Management, S.C. Johnson College of Business<br>PhD Candidate in Statistics, College of Computing and Information Sciences<br>Cornell University</p>
         </div>
-        <a class="button primary" href="mailto:tr336@cornell.edu">tr336@cornell.edu</a>
+        <a class="button primary" href="mailto:tr336@cornell.edu" data-track="click_email" data-track-target="contact_email">tr336@cornell.edu</a>
       </section>
     </main>
 
     <footer class="site-footer">
       <span>&copy; <span id="year"></span> Tejas Ramdas</span>
-      <a href="#top">Back to top</a>
+      <span class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="#top">Back to top</a>
+      </span>
     </footer>
 
     <script src="script.js"></script>
