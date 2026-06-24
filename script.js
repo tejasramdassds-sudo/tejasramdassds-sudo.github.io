@@ -3,7 +3,7 @@ if (year) {
   year.textContent = new Date().getFullYear();
 }
 
-const TRACKING_ENDPOINT = "";
+const TRACKING_ENDPOINT = "https://tejas-website-event-logger.tejas-ramdas-sds.workers.dev/collect";
 
 const cookieName = "tr_visitor_id";
 const getCookie = (name) => {

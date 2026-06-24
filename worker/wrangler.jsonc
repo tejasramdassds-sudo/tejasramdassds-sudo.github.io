@@ -3,11 +3,12 @@
   "name": "tejas-website-event-logger",
   "main": "src/index.js",
   "compatibility_date": "2026-06-24",
+  "workers_dev": true,
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "tejas-website-events",
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
+      "database_id": "1828ac17-aa9b-45bb-9063-3540274fb278"
     }
   ]
 }

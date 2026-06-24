@@ -35,16 +35,16 @@ npx wrangler secret put ADMIN_TOKEN
 npx wrangler deploy
 ```
 
-After deploy, Cloudflare will print a Worker URL like:
+The deployed Worker URL is:
 
 ```text
-https://tejas-website-event-logger.<your-subdomain>.workers.dev
+https://tejas-website-event-logger.tejas-ramdas-sds.workers.dev
 ```
 
 Put this exact collect endpoint in `script.js`:
 
 ```js
-const TRACKING_ENDPOINT = "https://tejas-website-event-logger.<your-subdomain>.workers.dev/collect";
+const TRACKING_ENDPOINT = "https://tejas-website-event-logger.tejas-ramdas-sds.workers.dev/collect";
 ```
 
 Then commit and push the website.
@@ -56,10 +56,10 @@ Use your admin token:
 ```powershell
 $token = "YOUR_ADMIN_TOKEN"
 Invoke-RestMethod -Headers @{ Authorization = "Bearer $token" } `
-  -Uri "https://tejas-website-event-logger.<your-subdomain>.workers.dev/summary"
+  -Uri "https://tejas-website-event-logger.tejas-ramdas-sds.workers.dev/summary"
 
 Invoke-RestMethod -Headers @{ Authorization = "Bearer $token" } `
-  -Uri "https://tejas-website-event-logger.<your-subdomain>.workers.dev/events?limit=100"
+  -Uri "https://tejas-website-event-logger.tejas-ramdas-sds.workers.dev/events?limit=100"
 ```
 
 Keep the admin token private. Anyone with that token can read stored IP/event logs.
