@@ -6,6 +6,7 @@ const allowedOrigins = new Set([
 
 const corsHeaders = (origin) => ({
   "Access-Control-Allow-Origin": allowedOrigins.has(origin) ? origin : "https://tejasramdassds-sudo.github.io",
+  "Access-Control-Allow-Credentials": "true",
   "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
   "Access-Control-Max-Age": "86400",
