@@ -38,7 +38,7 @@ const getUtm = () => {
 };
 
 const sendEvent = (eventName, target = "", extra = {}) => {
-  if (!TRACKING_ENDPOINT) return;
+  if (!TRACKING_ENDPOINT || window.location.hostname !== "tejasramdassds-sudo.github.io") return;
 
   const payload = {
     event_name: eventName,
