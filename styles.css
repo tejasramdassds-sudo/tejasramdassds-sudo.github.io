@@ -48,6 +48,10 @@ h1{font-size:46px;margin-bottom:24px}h2{font-size:30px;margin-bottom:24px}h3{fon
 .panel-paper p{font-size:14px;line-height:1.8;margin-bottom:12px}
 .panel-paper .paper-status{font-size:12px}
 .panel-paper .text-link{margin-top:4px}
+.paper-visual{margin:20px 0 24px}
+.paper-visual a{display:block;background:white}
+.paper-visual img{width:100%;height:auto;object-fit:contain}
+.paper-visual figcaption{padding-top:10px;font-size:12px;line-height:1.65}
 .panel-footer{padding-top:22px;border-top:1px solid var(--line)}
 .research-directory{padding-block:44px 72px}
 .research-subgroup{margin-top:22px}

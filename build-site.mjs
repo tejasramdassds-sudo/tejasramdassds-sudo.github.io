@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const base = 'https://tejasramdassds-sudo.github.io';
-const version = '20260916-panels';
+const version = '20260916-figures';
 const esc = (s) => String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 // Icon paths from Lucide, used under the ISC license (assets/lucide-LICENSE).
 const paths = {
@@ -42,6 +42,32 @@ const papers = [
   { id:'executive-skills', group:'earlier', title:'The Demand for Executive Skills', authors:'Stephen Hansen, Tejas Ramdas, Raffaella Sadun, and Joseph Fuller', citation:'Hansen, S., Ramdas, T., Sadun, R., & Fuller, J.', status:'NBER Working Paper 28959', url:'https://www.nber.org/papers/w28959', outlet:'NBER' },
   { id:'management-ideas', group:'earlier', title:'Visualizing a Century of Management Ideas', authors:'Tejas Ramdas, Raffaella Sadun, and Nicholas Bloom', citation:'Ramdas, T., Sadun, R., & Bloom, N.', status:'Harvard Business Review, 2022', url:'https://hbr.org/2022/09/visualizing-a-century-of-management-ideas', outlet:'Harvard Business Review' }
 ];
+const researchFigures = {
+  'generative-inventions': [
+    {file:'search-incursion.png', width:1198, height:763, caption:'Search incursion in inventive space. The maps illustrate patent-text comparisons; classification comes from blinded text review.'},
+    {file:'search-incursion-distance.png', width:1859, height:1046, caption:'Observed search-incursion rates across technological-distance bins. The fitted curve is descriptive; intervals are unadjusted.'}
+  ],
+  'shaping-the-search-landscape': [
+    {file:'search-landscape.png', width:2218, height:863, caption:'Prior knowledge relationships and the timing of follow-on search. The central artifact illustration is conceptual.'}
+  ],
+  'ai-collectives': [
+    {file:'ai-coordination.png', width:2009, height:1496, caption:'Graph coloring and protocol switching under finite acknowledgement chains.'}
+  ],
+  'changing-recombination-spaces': [
+    {file:'recombination-spaces.png', width:2219, height:986, caption:'How a generative invention can reconfigure interfirm knowledge flows. Network changes are hypothetical.'}
+  ],
+  'genesis-of-constitutions': [
+    {file:'genesis-of-constitutions.png', width:2219, height:1131, caption:'Decomposing constitutional language into earlier reference contributions and novel vocabulary. Conceptual schematic.'}
+  ],
+  'bellwether-trades': [
+    {file:'bellwether-trades.png', width:2219, height:1298, caption:'From trade sequences to forecasts and trade-level influence. Conceptual schematic.'}
+  ],
+  'iconic-constitutions': [
+    {file:'iconic-constitutions.png', width:2218, height:1188, caption:'Genetic search for reference constitutions, balancing originality and coverage. Illustrative, not estimated results.'}
+  ]
+};
+const paperFigures = (p) => (researchFigures[p.id] || []).map(figure=>`<figure class="paper-visual"><a href="assets/${figure.file}" aria-label="View full-size figure for ${esc(p.title)}" title="Open full-size figure" data-track="view_figure" data-track-target="${p.id}"><img src="assets/${figure.file}" width="${figure.width}" height="${figure.height}" alt="${esc(figure.caption)}" loading="lazy" decoding="async"></a><figcaption>${esc(figure.caption)}</figcaption></figure>`).join('');
+
 const education = [
   ['2026 (expected December)', 'Ph.D. in Statistics', 'Cornell University', 'Advisor: Martin T. Wells'],
   ['2026 (August)', 'Ph.D. in Management', 'Cornell University, S.C. Johnson College of Business', 'Advisor: Gautam Ahuja'],
@@ -131,7 +157,7 @@ const researchPanels = [
 ];
 const previewPaper = (p) => {
   const href = p.detail ? p.id+'.html' : 'research.html#'+p.id;
-  return `<article class="panel-paper"><p class="paper-status">${p.status}</p><h4><a href="${href}" data-track="paper_interest" data-track-target="${p.id}">${p.short}</a></h4><p class="authors">${p.authors}</p><p>${esc(p.summary)}</p>${link(href,'Read summary',p.id,'right')}</article>`;
+  return `<article class="panel-paper"><p class="paper-status">${p.status}</p><h4><a href="${href}" data-track="paper_interest" data-track-target="${p.id}">${p.short}</a></h4><p class="authors">${p.authors}</p>${paperFigures(p)}<p>${esc(p.summary)}</p>${link(href,'Read summary',p.id,'right')}</article>`;
 };
 
 page('index.html', 'Tejas Ramdas | Strategy, Organization Theory & Statistics | Cornell', 'Tejas Ramdas, Ph.D. in Management and Ph.D. candidate in Statistics at Cornell University. Research on innovation search, competitive strategy, and coordination in AI collectives.', `
@@ -157,7 +183,7 @@ page('index.html', 'Tejas Ramdas | Strategy, Organization Theory & Statistics | 
 const researchGroups = [['innovation','Innovation &amp; competitive search'],['coordination','Coordination in AI collectives'],['statistics','Statistics, finance &amp; law'],['earlier','Earlier collaborative work']];
 function paperRow(p, heading = 'h3') {
   const local = !!p.detail;
-  return `<article class="paper" id="${p.id}"><p class="paper-status">${p.status}</p><${heading}>${local?`<a href="${p.id}.html" data-track="paper_interest" data-track-target="${p.id}">${p.title}</a>`:p.title}</${heading}><p class="authors">${p.authors}</p>${p.summary?`<p>${esc(p.summary)}</p>`:''}${p.abstract?`<details><summary data-track="expand_abstract" data-track-target="${p.id}">Summary</summary><p>${esc(p.abstract)}</p></details>`:''}${local||p.url?`<div class="inline-actions">${local?link(p.id+'.html','Paper overview',p.id,'right'):''}${p.url?link(p.url,p.outlet,p.id):''}</div>`:''}</article>`;
+  return `<article class="paper" id="${p.id}"><p class="paper-status">${p.status}</p><${heading}>${local?`<a href="${p.id}.html" data-track="paper_interest" data-track-target="${p.id}">${p.title}</a>`:p.title}</${heading}><p class="authors">${p.authors}</p>${paperFigures(p)}${p.summary?`<p>${esc(p.summary)}</p>`:''}${p.abstract?`<details><summary data-track="expand_abstract" data-track-target="${p.id}">Summary</summary><p>${esc(p.abstract)}</p></details>`:''}${local||p.url?`<div class="inline-actions">${local?link(p.id+'.html','Paper overview',p.id,'right'):''}${p.url?link(p.url,p.outlet,p.id):''}</div>`:''}</article>`;
 }
 page('research.html','Research | Tejas Ramdas | Cornell','Management and Statistics research by Tejas Ramdas: generative inventions, search incursions, AI collectives, explainable AI, finance, and constitutional text.',intro('Research','Research',`<p class="lead">Two research programs: management and statistics.</p><nav class="research-jumps" aria-label="Research programs">${researchPanels.map(panel=>link('#'+panel.id,panel.title,'research_'+panel.id,'right')).join('')}</nav>`)+`<div class="container research-panels research-directory">${researchPanels.map(panel=>`<section class="research-panel" id="${panel.id}" aria-labelledby="${panel.id}-title"><header class="panel-heading"><h2 id="${panel.id}-title">${panel.title}</h2><p>${panel.description}</p></header>${researchGroups.filter(([id])=>panel.groups.includes(id)).map(([id,label])=>`<section class="research-subgroup"${id!==panel.id?` id="${id}"`:''}><h3 class="subgroup-title">${label}</h3>${papers.filter(p=>p.group===id).map(p=>paperRow(p,'h4')).join('')}</section>`).join('')}</section>`).join('')}</div>`,'Research');
 
