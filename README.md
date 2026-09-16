@@ -8,7 +8,7 @@ Edit `build-site.mjs` for content and shared page structure, `styles.css` for ap
 
 The September 2026 revision uses the August 2026 CV and September application statements. Management Ph.D.: August 2026. Statistics Ph.D.: expected December 2026. The two master's degrees remain separate. The established topic URLs remain available.
 
-`assets/Tejas_Ramdas_CV.pdf` is the print-rendered public version of `cv.html`. After changing the CV content, regenerate this PDF from the print layout with browser headers and footers disabled. It excludes telephone, immigration information, and references' contact details. Source application packets and unpublished paper PDFs are not included. The job-market draft is marked not for circulation. Research figures were extracted in full from the research statement; the portrait remains uncropped.
+`assets/Tejas_Ramdas_Academic_CV_August_2026.pdf` is the original supplied CV, published unchanged at the owner's request. `cv.html` displays complete page images rendered from that PDF and links directly to it. `assets/Tejas_Ramdas_CV.pdf` holds an identical copy to preserve the previous download URL. To update the CV, replace both PDF files with the new original and rerender `assets/cv-original-page-*.png`; do not reconstruct or shorten it. Other application packets and unpublished paper PDFs are not included. The job-market draft is marked not for circulation. Research figures were extracted in full from the research statement; the portrait remains uncropped.
 
 Colors use Cornell red (`#b31b1b`), charcoal, white, and neutral gray. Icons are from Lucide under the license in `assets/lucide-LICENSE`.
 
