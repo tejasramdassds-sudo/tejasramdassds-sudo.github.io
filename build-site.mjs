@@ -7,6 +7,16 @@ const root = dirname(fileURLToPath(import.meta.url));
 const base = 'https://tejasramdassds-sudo.github.io';
 const cornellSite = 'https://sites.coecis.cornell.edu/tejasramdas/';
 const version = '20260916-cornell';
+const updated = '2026-09-24';
+const searchVerification = 'HO2lcfGB0txjI-IF2DABt29dFvfqq5JjdVegt3W-X1k';
+const person = {
+  '@type':'Person', '@id':base+'/#person', name:'Tejas Ramdas', url:base+'/',
+  image:base+'/assets/tejas-ramdas-portrait-wide.jpg', email:'mailto:tr336@cornell.edu',
+  description:'Ph.D. in Management, Cornell University (August 2026); Ph.D. candidate in Statistics (expected December 2026). Research in strategy, organization theory, innovation, and statistical methods.',
+  affiliation:{'@type':'CollegeOrUniversity',name:'Cornell University',url:'https://www.cornell.edu/'},
+  knowsAbout:['Competitive strategy','Organization theory','Innovation search','Generative inventions','AI coordination','Statistics','Explainable AI','Natural language processing'],
+  sameAs:[cornellSite,'https://bowers.cornell.edu/people/tejas-ramdas','https://stat.cornell.edu/people/tejas-ramdas','https://www.nber.org/people/rtejasonline','https://www.linkedin.com/in/tejas-ramdas-']
+};
 const esc = (s) => String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 // Icon paths from Lucide, used under the ISC license (assets/lucide-LICENSE).
 const paths = {
@@ -109,7 +119,15 @@ const courses = [
 ];
 const pageNames = [];
 function page(file, title, description, content, active = '', schema = null) {
-  const navigation = [['index.html','About'],['research.html','Research'],['teaching.html','Teaching'],['cv.html','CV'],['index.html#contact','Contact']];
+  const navigation = [['./','About'],['research.html','Research'],['teaching.html','Teaching'],['cv.html','CV'],['./#contact','Contact']];
+  const url = base+'/'+(file === 'index.html' ? '' : file);
+  const article = schema?.['@type'] === 'ScholarlyArticle' ? {...schema,'@id':url+'#article',mainEntityOfPage:{'@id':url+'#webpage'}} : null;
+  const structuredData = {'@context':'https://schema.org','@graph':[
+    {'@type':'WebSite','@id':base+'/#website',url:base+'/',name:'Tejas Ramdas',alternateName:'Tejas Ramdas | Cornell University',publisher:{'@id':person['@id']},inLanguage:'en'},
+    person,
+    {'@type':file === 'index.html' ? 'ProfilePage' : 'WebPage','@id':url+'#webpage',url,name:title,description,inLanguage:'en',isPartOf:{'@id':base+'/#website'},about:{'@id':person['@id']},...(file === 'index.html' ? {mainEntity:{'@id':person['@id']}} : article ? {mainEntity:{'@id':article['@id']}} : {})},
+    ...(article ? [article] : [])
+  ]};
   const html = `<!doctype html>
 <html lang="en">
 <head>
@@ -117,7 +135,8 @@ function page(file, title, description, content, active = '', schema = null) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="${esc(description)}">
   <meta name="author" content="Tejas Ramdas">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  ${file === 'index.html' ? `<meta name="google-site-verification" content="${searchVerification}">` : ''}
   <meta name="theme-color" content="#b31b1b">
   <title>${esc(title)}</title>
   <link rel="canonical" href="${base}/${file === 'index.html' ? '' : file}">
@@ -135,12 +154,12 @@ function page(file, title, description, content, active = '', schema = null) {
   <link rel="stylesheet" href="styles.css?v=${version}">
   <script src="navigation.js?v=${version}" defer></script>
   <script src="script.js?v=${version}" defer></script>
-${schema ? `<script type="application/ld+json">${JSON.stringify(schema).replaceAll('<','\\u003c')}</script>` : ''}
+  <script type="application/ld+json">${JSON.stringify(structuredData).replaceAll('<','\\u003c')}</script>
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header"><div class="container header-inner">
-    <a class="brand" href="index.html">Tejas Ramdas</a>
+    <a class="brand" href="./">Tejas Ramdas</a>
     <button class="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation" title="Navigation">${icon('menu')}</button>
     <nav class="site-nav" id="primary-nav" aria-label="Primary navigation">${navigation.map(([url,label])=>`<a href="${url}"${active===label ? ' aria-current="page"' : ''}>${label}</a>`).join('')}</nav>
   </div></header>
@@ -169,7 +188,7 @@ const previewPaper = (p) => {
   return `<article class="panel-paper"><p class="paper-status">${p.status}</p><h4><a href="${href}" data-track="paper_interest" data-track-target="${p.id}">${p.short}</a></h4><p class="authors">${linkedText(p.authors)}</p>${paperFigures(p)}<p>${esc(p.summary)}</p>${link(href,'Read summary',p.id,'right')}</article>`;
 };
 
-page('index.html', 'Tejas Ramdas | Strategy, Organization Theory & Statistics | Cornell', 'Tejas Ramdas, Ph.D. in Management and Ph.D. candidate in Statistics at Cornell University. Research on innovation search, competitive strategy, and coordination in AI collectives.', `
+page('index.html', 'Tejas Ramdas | Cornell Strategy & Statistics Research', 'Tejas Ramdas at Cornell: Ph.D. in Management and Ph.D. candidate in Statistics. Research in strategy, innovation, AI coordination, and statistical methods. Papers and CV.', `
 <section class="profile container" aria-labelledby="name">
   <div class="profile-title"><div><p class="eyebrow">${linkedText('Cornell University')}</p><h1 id="name">Tejas Ramdas</h1></div><p class="disciplines">Strategy &middot; Organization theory &middot; Statistics</p></div>
   <div class="profile-grid">
@@ -187,7 +206,7 @@ page('index.html', 'Tejas Ramdas | Strategy, Organization Theory & Statistics | 
 <section id="timeline" class="band"><div class="container"><div class="section-top"><h2>Education &amp; experience</h2>${link('cv.html','Full CV','background_cv','right')}</div><div class="background-grid"><div><h3 class="column-label">Education</h3>${timeline(education)}</div><div><h3 class="column-label">Professional experience</h3>${timeline(experience)}</div></div></div></section>
 <section id="teaching" class="band quiet"><div class="container teaching-preview"><div><p class="section-label">Teaching</p><h2>Theory, evidence, and independent judgment.</h2><p>Teaching assistant experience across 15 MBA, graduate, and undergraduate courses.</p></div><div><ul class="course-shortlist"><li>Strategy Formulation and Competitive Analysis</li><li>The Strategic Management of Technology and Innovation</li><li>Learning, Inference and Decision Making with Data</li></ul>${link('teaching.html','Teaching approach and experience','teaching_overview','right')}</div></div></section>
 <section id="contact" class="band"><div class="container contact-inner"><div><p class="section-label">Contact</p><h2>Get in touch</h2>${link('mailto:tr336@cornell.edu','tr336@cornell.edu','contact_email','mail')}</div><address class="contact-address">320 Tata Innovation Center, ${linkedText('Cornell Tech')}<br>11 East Loop Road<br>New York, NY 10044</address></div></section>
-`, 'About', {'@context':'https://schema.org','@type':'Person','@id':base+'/#person',name:'Tejas Ramdas',url:base+'/',image:base+'/assets/tejas-ramdas-portrait-wide.jpg',email:'mailto:tr336@cornell.edu',description:'Ph.D. in Management, Cornell University (August 2026); Ph.D. candidate in Statistics (expected December 2026).',affiliation:{'@type':'CollegeOrUniversity',name:'Cornell University',url:institutionLinks.get('Cornell University')},knowsAbout:['Competitive strategy','Organization theory','Innovation search','AI coordination','Statistics'],sameAs:['https://bowers.cornell.edu/people/tejas-ramdas','https://www.nber.org/people/rtejasonline','https://www.linkedin.com/in/tejas-ramdas-']});
+`, 'About');
 
 const researchGroups = [['innovation','Innovation &amp; competitive search'],['coordination','Coordination in AI collectives'],['statistics','Statistics, finance &amp; law'],['earlier','Earlier collaborative work']];
 function paperRow(p, heading = 'h3') {
@@ -237,5 +256,5 @@ for (const [slug,title,heading,body,paperId] of topics) {
 
 page('privacy.html','Privacy | Tejas Ramdas','Privacy notice for Tejas Ramdas\' academic website.',intro('Privacy','Privacy notice')+`<div class="container reading"><p>This site uses basic analytics to understand visits and interactions with academic work. Analytics may record page views, paper-interest clicks, contact clicks, referrers, device/browser information, approximate location metadata, IP address, and a first-party visitor ID cookie used to distinguish repeat visits.</p><p>The analytics are used to understand which research areas and pages are drawing attention and to improve the site. The site does not require visitors to log in and does not sell analytics data.</p><p>If you prefer not to be included in site analytics, you can block cookies and analytics requests in your browser or contact <a href="mailto:tr336@cornell.edu">tr336@cornell.edu</a>.</p></div>`);
 
-writeFileSync(join(root,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pageNames.map(file=>`  <url><loc>${base}/${file==='index.html'?'':file}</loc><lastmod>2026-09-16</lastmod></url>`).join('\n')}\n</urlset>\n`);
+writeFileSync(join(root,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pageNames.map(file=>`  <url><loc>${base}/${file==='index.html'?'':file}</loc><lastmod>${updated}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 console.log(`Built ${pageNames.length} static pages.`);

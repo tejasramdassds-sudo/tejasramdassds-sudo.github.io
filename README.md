@@ -2,6 +2,20 @@
 
 Static academic website for GitHub Pages.
 
+## Search Discovery
+
+The homepage includes the Google Search Console verification tag for the owner's
+Cornell Google account. Keep it in place to retain verification. A shared JSON-LD
+graph connects the website and its pages to Tejas's Person identity, including
+the Cornell personal site, departmental profile, NBER, and LinkedIn. The homepage
+is a ProfilePage; paper overviews retain ScholarlyArticle metadata. Every page
+has its own canonical URL, and the sitemap uses the canonical homepage URL.
+
+Run `python verify-seo.py` after rebuilding to check metadata, structured data,
+the sitemap, and local links. The `updated` date in `build-site.mjs` records the
+last shared page-content or metadata revision; do not advance it for a no-op build.
+Search Console submission and indexing results are separate from these code checks.
+
 ## Updating the site
 
 Edit `build-site.mjs` for content and shared page structure, `styles.css` for appearance, and `navigation.js` for navigation behavior. Run `node build-site.mjs` to regenerate the 18 static HTML pages and sitemap. The site works without a development server or build dependencies. Commit the generated HTML alongside its source.
