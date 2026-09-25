@@ -6,6 +6,7 @@ import { peopleLinks, institutionLinks, footerGroups } from './external-links.mj
 const root = dirname(fileURLToPath(import.meta.url));
 const base = 'https://tejasramdassds-sudo.github.io';
 const cornellSite = 'https://sites.coecis.cornell.edu/tejasramdas/';
+const scholarProfile = 'https://scholar.google.com/citations?user=CXrL68IAAAAJ';
 const version = '20260916-cornell';
 const updated = '2026-09-24';
 const searchVerification = 'HO2lcfGB0txjI-IF2DABt29dFvfqq5JjdVegt3W-X1k';
@@ -15,7 +16,7 @@ const person = {
   description:'Ph.D. in Management, Cornell University (August 2026); Ph.D. candidate in Statistics (expected December 2026). Research in strategy, organization theory, innovation, and statistical methods.',
   affiliation:{'@type':'CollegeOrUniversity',name:'Cornell University',url:'https://www.cornell.edu/'},
   knowsAbout:['Competitive strategy','Organization theory','Innovation search','Generative inventions','AI coordination','Statistics','Explainable AI','Natural language processing'],
-  sameAs:[cornellSite,'https://bowers.cornell.edu/people/tejas-ramdas','https://stat.cornell.edu/people/tejas-ramdas','https://www.nber.org/people/rtejasonline','https://www.linkedin.com/in/tejas-ramdas-']
+  sameAs:[cornellSite,scholarProfile,'https://bowers.cornell.edu/people/tejas-ramdas','https://stat.cornell.edu/people/tejas-ramdas','https://www.nber.org/people/rtejasonline','https://www.linkedin.com/in/tejas-ramdas-']
 };
 const esc = (s) => String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 // Icon paths from Lucide, used under the ISC license (assets/lucide-LICENSE).
@@ -192,7 +193,7 @@ page('index.html', 'Tejas Ramdas | Cornell Strategy & Statistics Research', 'Tej
 <section class="profile container" aria-labelledby="name">
   <div class="profile-title"><div><p class="eyebrow">${linkedText('Cornell University')}</p><h1 id="name">Tejas Ramdas</h1></div><p class="disciplines">Strategy &middot; Organization theory &middot; Statistics</p></div>
   <div class="profile-grid">
-    <div><figure class="portrait"><img src="assets/tejas-ramdas-portrait-wide.jpg" alt="Portrait of Tejas Ramdas" width="1200" height="800" fetchpriority="high"><figcaption class="portrait-caption"><strong>${linkedText('Cornell University')}</strong><br>${linkedText('S.C. Johnson College of Business')}<br>${linkedText('Statistics and Data Science')}</figcaption></figure><div class="profile-links">${link('mailto:tr336@cornell.edu','Email','profile_email','mail')}${link('cv.html','Curriculum vitae','profile_cv','right')}${link(cornellSite,'Cornell website','profile_cornell')}${link('profiles-and-papers.html','Profiles','profile_links')}</div></div>
+    <div><figure class="portrait"><img src="assets/tejas-ramdas-portrait-wide.jpg" alt="Portrait of Tejas Ramdas" width="1200" height="800" fetchpriority="high"><figcaption class="portrait-caption"><strong>${linkedText('Cornell University')}</strong><br>${linkedText('S.C. Johnson College of Business')}<br>${linkedText('Statistics and Data Science')}</figcaption></figure><div class="profile-links">${link('mailto:tr336@cornell.edu','Email','profile_email','mail')}${link('cv.html','Curriculum vitae','profile_cv','right')}${link(cornellSite,'Cornell website','profile_cornell')}${link(scholarProfile,'Google Scholar','profile_scholar')}${link('profiles-and-papers.html','Profiles','profile_links')}</div></div>
     <div class="bio"><p class="credentials"><strong>Ph.D. in Management</strong>, ${linkedText('Cornell University')}, August 2026<br><strong>Ph.D. candidate in Statistics</strong>, expected December 2026</p>
     <p class="lead">I study how firms compete through innovation search, and how technological breakthroughs change the possibilities for invention.</p>
     <p>My research examines how firms move into new areas of invention and shape the opportunities available to other firms. I also study coordination and common knowledge in collectives of AI agents.</p>
@@ -226,11 +227,12 @@ page('cv.html','Curriculum Vitae | Tejas Ramdas','Original August 2026 academic 
 
 const profiles = [
   ['My Cornell website',cornellSite],
+  ['Google Scholar',scholarProfile],
   ['Cornell Bowers','https://bowers.cornell.edu/people/tejas-ramdas'],
   ['Cornell Johnson doctoral program','https://www.johnson.cornell.edu/programs/phd-program/current-students/'],
   ['NBER','https://www.nber.org/people/rtejasonline'],
   ['LinkedIn','https://www.linkedin.com/in/tejas-ramdas-'],
-  ['GitHub','https://github.com/tejasramdas'],
+  ['GitHub','https://github.com/tejasramdassds-sudo'],
   ['ResearchGate','https://www.researchgate.net/scientific-contributions/Tejas-Ramdas-2292054360']
 ];
 const directory = (items) => `<ul class="profile-directory">${items.map(([name,url])=>`<li><a href="${url}" data-track="click_external" data-track-target="${esc(name)}"><span>${esc(name)}</span>${icon('arrow')}</a></li>`).join('')}</ul>`;

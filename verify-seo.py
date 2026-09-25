@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parent
 BASE = "https://tejasramdassds-sudo.github.io/"
 CORNELL = "https://sites.coecis.cornell.edu/tejasramdas/"
+SCHOLAR = "https://scholar.google.com/citations?user=CXrL68IAAAAJ"
 
 
 class Page(HTMLParser):
@@ -79,12 +80,15 @@ for filename, page in pages.items():
     person = next(n for n in graph if n["@type"] == "Person")
     assert person["name"] == "Tejas Ramdas"
     assert CORNELL in person["sameAs"]
+    assert SCHOLAR in person["sameAs"]
+    assert "https://github.com/tejasramdas" not in page.refs
     webpage = next(n for n in graph if n["@id"] == url + "#webpage")
     assert webpage["url"] == url
     if filename == "index.html":
         assert webpage["@type"] == "ProfilePage"
         assert webpage["mainEntity"]["@id"] == person["@id"]
         assert page.meta["google-site-verification"]
+        assert SCHOLAR in page.refs
     for ref in page.refs:
         parsed = urlsplit(urljoin(url, ref))
         if parsed.netloc != urlsplit(BASE).netloc:
@@ -96,6 +100,7 @@ for filename, page in pages.items():
         links_checked += 1
 
 sitemap = ET.parse(ROOT / "sitemap.xml")
+assert SCHOLAR in pages["profiles-and-papers.html"].refs
 ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
 entries = sitemap.findall("s:url", ns)
 assert {e.find("s:loc", ns).text for e in entries} == urls
