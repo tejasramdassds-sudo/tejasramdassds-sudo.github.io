@@ -136,7 +136,7 @@ function page(file, title, description, content, active = '', schema = null) {
   <meta name="description" content="${esc(description)}">
   <meta name="author" content="Tejas Ramdas">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  ${file === 'index.html' ? `<meta name="google-site-verification" content="${searchVerification}">` : ''}
+${file === 'index.html' ? `  <meta name="google-site-verification" content="${searchVerification}">` : ''}
   <meta name="theme-color" content="#b31b1b">
   <title>${esc(title)}</title>
   <link rel="canonical" href="${base}/${file === 'index.html' ? '' : file}">
