@@ -253,7 +253,6 @@ const profiles = [
   ['Cornell Johnson doctoral program','https://www.johnson.cornell.edu/programs/phd-program/current-students/'],
   ['NBER','https://www.nber.org/people/rtejasonline'],
   ['LinkedIn','https://www.linkedin.com/in/tejas-ramdas-'],
-  ['GitHub','https://github.com/tejasramdassds-sudo'],
   ['ResearchGate','https://www.researchgate.net/scientific-contributions/Tejas-Ramdas-2292054360']
 ];
 const directory = (items) => `<ul class="profile-directory">${items.map(([name,url])=>`<li><a href="${url}" data-track="click_external" data-track-target="${esc(name)}"><span>${esc(name)}</span>${icon('arrow')}</a></li>`).join('')}</ul>`;

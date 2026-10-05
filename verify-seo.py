@@ -97,6 +97,12 @@ for filename, page in pages.items():
     assert CORNELL in person["sameAs"]
     assert SCHOLAR in person["sameAs"]
     assert "https://github.com/tejasramdas" not in page.refs
+    for ref in page.refs + person["sameAs"]:
+        parsed_profile = urlsplit(ref)
+        assert not (
+            parsed_profile.hostname in {"github.com", "www.github.com"}
+            and parsed_profile.path.lower().split("/")[1:2] == ["tejasramdassds-sudo"]
+        ), (filename, "GitHub profile must not be publicly linked", ref)
     webpage = next(n for n in graph if n["@id"] == url + "#webpage")
     assert webpage["url"] == url
     if filename == "index.html":
