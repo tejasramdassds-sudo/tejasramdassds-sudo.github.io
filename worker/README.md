@@ -51,6 +51,20 @@ Then commit and push the website.
 
 ## Viewing Logs
 
+The October 5 update is deployed as version
+`6a5145cd-a8b2-4305-b119-2a099507153c`. The account remains on Workers Free.
+
+The updated logger supports the personal GitHub Pages origin and, with explicit analytics
+consent, the `/tejasramdas/` path on `sites.coecis.cornell.edu`. Other Cornell
+sites are rejected. Cornell events use no visitor-ID cookie. The private
+`/events` response now includes `page_url` and its derived `site` label
+(`personal`, `cornell`, or `unknown` for unrecognized historical records).
+`/summary` includes `page_views_by_site`; `analytics_test` events do not count
+as page views. Browser page and click tracking on Cornell is configured in
+the sibling `website-cornell` directory.
+
+Run focused backend tests with `node --test src/index.test.js` before deployment.
+
 Use your admin token:
 
 ```powershell

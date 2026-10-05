@@ -1,5 +1,6 @@
 const allowedOrigins = new Set([
   "https://tejasramdassds-sudo.github.io",
+  "https://sites.coecis.cornell.edu",
   "http://127.0.0.1:4173",
   "http://localhost:4173",
 ]);
@@ -43,6 +44,16 @@ const requireAdmin = (request, env) => {
   return request.headers.get("Authorization") === expected;
 };
 
+const siteForUrl = (value) => {
+  try {
+    const url = new URL(value);
+    if (url.origin === "https://tejasramdassds-sudo.github.io") return "personal";
+    if (url.origin === "https://sites.coecis.cornell.edu" &&
+        (url.pathname === "/tejasramdas" || url.pathname.startsWith("/tejasramdas/"))) return "cornell";
+  } catch {}
+  return "unknown";
+};
+
 async function collect(request, env, origin) {
   let payload;
   try {
@@ -51,11 +62,22 @@ async function collect(request, env, origin) {
     return json({ ok: false, error: "Invalid JSON" }, 400, origin);
   }
 
+  const site = siteForUrl(payload?.page_url);
+  if (!allowedOrigins.has(origin) || !["personal", "cornell"].includes(site) ||
+      new URL(payload.page_url).origin !== origin) {
+    return json({ ok: false, error: "Unsupported site" }, 403, origin);
+  }
+  if (site === "cornell" && payload.analytics_consent !== "granted") {
+    return json({ ok: false, error: "Analytics consent required" }, 400, origin);
+  }
+
   const cf = request.cf || {};
   const extra = {
     botManagement: cf.botManagement || null,
     clientTcpRtt: cf.clientTcpRtt || null,
     tlsVersion: cf.tlsVersion || null,
+    site,
+    analyticsConsent: site === "cornell" ? "granted" : null,
   };
 
   await env.DB.prepare(
@@ -112,7 +134,7 @@ async function events(request, env, origin) {
   const limit = Math.min(Math.max(Number(url.searchParams.get("limit")) || 100, 1), 500);
   const result = await env.DB.prepare(
     `SELECT id, created_at, event_name, event_target, visitor_id, ip_address,
-      country, region, city, as_organization, user_agent, referrer, page_path,
+      country, region, city, as_organization, user_agent, referrer, page_url, page_path,
       page_title, link_url, utm_source, utm_medium, utm_campaign, utm_content
      FROM events
      ORDER BY id DESC
@@ -121,7 +143,9 @@ async function events(request, env, origin) {
     .bind(limit)
     .all();
 
-  return json({ ok: true, events: result.results || [] }, 200, origin);
+  return json({ ok: true, events: (result.results || []).map((event) => ({
+    ...event, site: siteForUrl(event.page_url),
+  })) }, 200, origin);
 }
 
 async function summary(request, env, origin) {
@@ -129,10 +153,11 @@ async function summary(request, env, origin) {
     return json({ ok: false, error: "Unauthorized" }, 401, origin);
   }
 
-  const [topEvents, topTargets, recentIps] = await Promise.all([
+  const [topEvents, topTargets, recentIps, pageViewsByUrl] = await Promise.all([
     env.DB.prepare("SELECT event_name, COUNT(*) AS count FROM events GROUP BY event_name ORDER BY count DESC").all(),
     env.DB.prepare("SELECT event_target, COUNT(*) AS count FROM events WHERE event_target IS NOT NULL GROUP BY event_target ORDER BY count DESC LIMIT 25").all(),
     env.DB.prepare("SELECT ip_address, country, as_organization, COUNT(*) AS count, MAX(created_at) AS last_seen FROM events WHERE ip_address IS NOT NULL GROUP BY ip_address, country, as_organization ORDER BY last_seen DESC LIMIT 50").all(),
+    env.DB.prepare("SELECT page_url, COUNT(*) AS count FROM events WHERE event_name = 'page_view' GROUP BY page_url").all(),
   ]);
 
   return json(
@@ -141,6 +166,11 @@ async function summary(request, env, origin) {
       top_events: topEvents.results || [],
       top_targets: topTargets.results || [],
       recent_ips: recentIps.results || [],
+      page_views_by_site: (pageViewsByUrl.results || []).reduce((counts, row) => {
+        const site = siteForUrl(row.page_url);
+        counts[site] = (counts[site] || 0) + row.count;
+        return counts;
+      }, { personal: 0, cornell: 0, unknown: 0 }),
     },
     200,
     origin
