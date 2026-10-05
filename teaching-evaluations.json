@@ -1,0 +1,312 @@
+{
+  "course": "MATH 1710 - Statistical Theory and Application",
+  "institution": "Cornell University",
+  "role": "Teaching assistant",
+  "document": "Teaching_Evaluations_Tejas_Ramdas.pdf",
+  "documentSha256": "38fd1971abae2fade0906031ddf79d4de272927b983e53c88e29910a5e9d977f",
+  "metrics": [
+    {
+      "id": "organization",
+      "label": "Organization and clarity",
+      "question": "Was the recitation organized and clear?",
+      "low": "Disorganized and unclear",
+      "high": "Very organized and lucid"
+    },
+    {
+      "id": "availability",
+      "label": "Willingness and availability to help",
+      "question": "Was the teaching assistant willing and available to help you overcome difficulties?",
+      "low": "Was of no help",
+      "high": "Was very helpful"
+    },
+    {
+      "id": "command",
+      "label": "Command of the course material",
+      "question": "How would you rate your teaching assistant's command of the course material?",
+      "low": "Poor command of material",
+      "high": "Excellent command of material"
+    },
+    {
+      "id": "interaction",
+      "label": "Educational quality of interactions",
+      "question": "What was the overall quality of your interaction with the teaching assistant?",
+      "low": "Low, taught me little",
+      "high": "High, extremely educational"
+    }
+  ],
+  "sections": [
+    {
+      "id": "fall-2020-203",
+      "term": "Fall 2020",
+      "section": "203",
+      "forms": 9,
+      "enrolled": 19,
+      "source": "CourseEval-Fall_2020-MATH_1710-DIS_203.pdf",
+      "pdfPage": 2,
+      "ratings": {
+        "organization": {
+          "mean": "4.88",
+          "responses": 8,
+          "counts": [
+            0,
+            0,
+            0,
+            1,
+            7
+          ]
+        },
+        "availability": {
+          "mean": "5.00",
+          "responses": 9,
+          "counts": [
+            0,
+            0,
+            0,
+            0,
+            9
+          ]
+        },
+        "command": {
+          "mean": "4.89",
+          "responses": 9,
+          "counts": [
+            0,
+            0,
+            0,
+            1,
+            8
+          ]
+        },
+        "interaction": {
+          "mean": "4.75",
+          "responses": 8,
+          "counts": [
+            0,
+            0,
+            1,
+            0,
+            7
+          ]
+        }
+      },
+      "comments": [
+        "It was very bland. The TA would go over the steps, and we had to follow them precisely and blindly, and that was all there was to do.",
+        "Tejas was an excellent TA, perhaps the best I have come across in any department or course I have taken in my time at Cornell to date. He is kind, knowledgeable, and more than willing to help students understand difficult material without coming close to \"spoonfeeding\" or favoring the interests of students to any unfair extent as I have seen at times in other courses /departments of the University. I also noticed that any time I would email him with a question about a topic or administrative details of the course, his average response time to my emails (some of which were sent well outside of standard business hours) was quite literally three minutes.",
+        "Tejas Ramdas makes the labs extremely applicable to the lecture. He repeats key concepts which is beyond helpful and makes sure that everyone understands before proceeding. Something else that is really useful is that he clarifies where one COULD get confused and makes sure to clear that up before we fall into that pit.",
+        "TA Ramdas was passionate about the subject and made the labs engaging.",
+        "TA Tejas Ramdas led a really great and helpful discussion section. He was so willing to offer help and advice, was kind, and truly listened to the student's needs in the class. He always made himself available for questions and always stopped to make sure that us (the students) were understanding the material being taught.",
+        "Tejas is the man."
+      ],
+      "recommendations": [
+        "He was helpful, so I guess so, but the way things worked was not productive.",
+        "I could not reccomend Tejas more highly. An absolutely terrific TA in every sense in my opinion.",
+        "I would, yes.",
+        "Yes, I would.",
+        "Yes.",
+        "Yes! Tejas Ramdas was a great and helpful TA, would definitely recommend taking a course assisted by him.",
+        "yes"
+      ]
+    },
+    {
+      "id": "spring-2021-201",
+      "term": "Spring 2021",
+      "section": "201",
+      "forms": 7,
+      "enrolled": 20,
+      "source": "CourseEval-Spring_2021-MATH_1710-DIS_201.pdf",
+      "pdfPage": 5,
+      "ratings": {
+        "organization": {
+          "mean": "4.57",
+          "responses": 7,
+          "counts": [
+            0,
+            0,
+            1,
+            1,
+            5
+          ]
+        },
+        "availability": {
+          "mean": "4.86",
+          "responses": 7,
+          "counts": [
+            0,
+            0,
+            0,
+            1,
+            6
+          ]
+        },
+        "command": {
+          "mean": "4.57",
+          "responses": 7,
+          "counts": [
+            0,
+            0,
+            1,
+            1,
+            5
+          ]
+        },
+        "interaction": {
+          "mean": "4.57",
+          "responses": 7,
+          "counts": [
+            0,
+            1,
+            0,
+            0,
+            6
+          ]
+        }
+      },
+      "comments": [
+        "He was very helpful and I really enjoyed his classes!"
+      ],
+      "recommendations": [
+        "Yes he was always very enthusiastic and asked good questions that tested our understanding of the subject.",
+        "Yes!",
+        "Yes, I would, he was very helpful and fostered participation and understanding. While I had a lot of trouble with this course, he was always very helpful and made the material easy to understand."
+      ]
+    },
+    {
+      "id": "spring-2021-202",
+      "term": "Spring 2021",
+      "section": "202",
+      "forms": 9,
+      "enrolled": 20,
+      "source": "CourseEval-Spring_2021-MATH_1710-DIS_202.pdf",
+      "pdfPage": 8,
+      "ratings": {
+        "organization": {
+          "mean": "4.78",
+          "responses": 9,
+          "counts": [
+            0,
+            0,
+            0,
+            2,
+            7
+          ]
+        },
+        "availability": {
+          "mean": "5.00",
+          "responses": 8,
+          "counts": [
+            0,
+            0,
+            0,
+            0,
+            8
+          ]
+        },
+        "command": {
+          "mean": "4.89",
+          "responses": 9,
+          "counts": [
+            0,
+            0,
+            0,
+            1,
+            8
+          ]
+        },
+        "interaction": {
+          "mean": "4.78",
+          "responses": 9,
+          "counts": [
+            0,
+            0,
+            0,
+            2,
+            7
+          ]
+        }
+      },
+      "comments": [
+        "Ramdas was very kind and I really liked the computer labs.",
+        "Tejas was very organized, and kept things moving. He seemed to have a hard time getting us students to really speak up and talk, but I wouldn't fault him too much for that. I think the online setting makes it much more challenging.",
+        "The recitation labs were very helpful and interesting. I thoroughly enjoyed the labs. The labs taught me a lot about the concepts.",
+        "very good at teaching and taught at the pace that was helpful to students",
+        "I liked that the recitations followed the computer lab assignments. This was helpful because I had never used the JMP software before this course, and sometimes needed to see how a process would happen in the software. It was also helpful that we discussed some of the questions for the lab. It helped me to feel more confident that I was thinking about the questions correctly. This helped me to not be so worried about the questions we did not discuss. Finally, I appreciated that the recitations were recorded because I could go back and watch it as needed.",
+        "Labs were easy and simple to follow along for. It was interesting to see how statistics can be applied to real world situations.",
+        "Labs were never too difficult and I appreciate that we went through them in class."
+      ],
+      "recommendations": [
+        "Yes",
+        "Yes",
+        "Yes absolutely.",
+        "yes",
+        "Yes, I think any student can be successful taking a course assisted by TA Ramdas. TA Ramdas is very genuinely excited about statistics and his passion comes through, which helped me to stay motivated.",
+        "Yes, TA Ramdas was able to explain the material well and was very accommodating.",
+        "I would highly recommend this TA to another student. He knew the material extremely well and explained the labs in a very easy way to understand."
+      ]
+    },
+    {
+      "id": "spring-2021-203",
+      "term": "Spring 2021",
+      "section": "203",
+      "forms": 7,
+      "enrolled": 18,
+      "source": "CourseEval-Spring_2021-MATH_1710-DIS_203.pdf",
+      "pdfPage": 11,
+      "ratings": {
+        "organization": {
+          "mean": "4.86",
+          "responses": 7,
+          "counts": [
+            0,
+            0,
+            0,
+            1,
+            6
+          ]
+        },
+        "availability": {
+          "mean": "4.71",
+          "responses": 7,
+          "counts": [
+            0,
+            0,
+            1,
+            0,
+            6
+          ]
+        },
+        "command": {
+          "mean": "5.00",
+          "responses": 7,
+          "counts": [
+            0,
+            0,
+            0,
+            0,
+            7
+          ]
+        },
+        "interaction": {
+          "mean": "4.50",
+          "responses": 6,
+          "counts": [
+            0,
+            0,
+            1,
+            1,
+            4
+          ]
+        }
+      },
+      "comments": [
+        "The recitation was very helpful!",
+        "The TA was really useful in labs.",
+        "Tejas Ramdas is very accommodating to students and is very invested in their work and ability to perform the course skills. Furthermore, he works to engage the students in the class, though zoom makes this difficult. He is always facilitating involvement and is very helpful when a student needs him to assist them."
+      ],
+      "recommendations": [
+        "Yes, he is very knowledgeable and clearly passionate about the subject.",
+        "Yes",
+        "Definitely, one of the nicest TAs, and very much invested in teaching the material and helping students, placing himself out there and welcoming questions."
+      ]
+    }
+  ]
+}

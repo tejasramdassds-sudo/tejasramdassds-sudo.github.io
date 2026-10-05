@@ -18,13 +18,30 @@ Search Console submission and indexing results are separate from these code chec
 
 ## Updating the site
 
-Edit `build-site.mjs` for content and shared page structure, `styles.css` for appearance, and `navigation.js` for navigation behavior. Run `node build-site.mjs` to regenerate the 18 static HTML pages and sitemap. The site works without a development server or build dependencies. Commit the generated HTML alongside its source.
+Edit `build-site.mjs` for content and shared page structure, `styles.css` for appearance, and `navigation.js` for navigation behavior. Run `node build-site.mjs` to regenerate the 19 static HTML pages and sitemap. The site works without a development server or build dependencies. Commit the generated HTML alongside its source.
 
 The September 2026 revision uses the August 2026 CV and September application statements. Management Ph.D.: August 2026. Statistics Ph.D.: expected December 2026. The two master's degrees remain separate. The established topic URLs remain available.
 
 `assets/Tejas_Ramdas_Academic_CV_August_2026.pdf` is the original supplied CV, published unchanged at the owner's request. `cv.html` displays complete page images rendered from that PDF and links directly to it. `assets/Tejas_Ramdas_CV.pdf` holds an identical copy to preserve the previous download URL. To update the CV, replace both PDF files with the new original and rerender `assets/cv-original-page-*.png`; do not reconstruct or shorten it. Other application packets and unpublished paper PDFs are not included. The job-market draft is marked not for circulation. Research figures were extracted in full from the research statement; the portrait remains uncropped.
 
 Colors use Cornell red (`#b31b1b`), charcoal, white, and neutral gray. Icons are from Lucide under the license in `assets/lucide-LICENSE`.
+
+## Teaching Evaluations
+
+`teaching-evaluations.html` publishes the complete four-section Cornell MATH 1710
+record: all 16 section-level rating items, response-weighted summaries for the
+four measures, and all 37 written responses. Both favorable and critical comments
+are retained. Anonymous response numbers are omitted from the HTML, and only
+whitespace is normalized. The 13-page `assets/Teaching_Evaluations_Tejas_Ramdas.pdf`
+is the unchanged original packet document. Teaching links directly to this page
+and replaces the previous helpfulness-only summary with all four measures.
+
+To regenerate the data from the original packet, run
+`python prepare-teaching-evaluations.py "<packet directory>"`, then rebuild.
+The extraction checks each source report against the combined PDF. Run
+`python verify-teaching-evaluations.py` to check every review, numerical summary,
+response count, and the PDF checksum. Do not substitute an average of rounded
+section scores for the pooled rating-count calculation.
 
 ## Performance
 

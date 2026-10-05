@@ -69,7 +69,7 @@ class Page(HTMLParser):
 
 
 pages = {p.name: Page(p.read_text(encoding="utf-8")) for p in ROOT.glob("*.html")}
-assert len(pages) == 18
+assert len(pages) == 19
 assert len({p.title for p in pages.values()}) == len(pages)
 urls = set()
 links_checked = 0
