@@ -1,3 +1,5 @@
+@font-face{font-family:Inter;font-style:normal;font-weight:100 900;font-display:optional;src:url("assets/inter-latin.woff2") format("woff2")}
+@font-face{font-family:"Libre Baskerville";font-style:normal;font-weight:400 700;font-display:optional;src:url("assets/libre-baskerville-latin.woff2") format("woff2")}
 :root{--red:#b31b1b;--red-dark:#861515;--ink:#222;--muted:#616163;--line:#dedede;--wash:#f6f6f5;--white:#fff;--serif:"Libre Baskerville",Georgia,serif;--sans:Inter,Arial,sans-serif}
 *{box-sizing:border-box;letter-spacing:0}
 html{scroll-behavior:smooth;scroll-padding-top:100px}

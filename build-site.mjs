@@ -7,8 +7,8 @@ const root = dirname(fileURLToPath(import.meta.url));
 const base = 'https://tejasramdassds-sudo.github.io';
 const cornellSite = 'https://sites.coecis.cornell.edu/tejasramdas/';
 const scholarProfile = 'https://scholar.google.com/citations?user=CXrL68IAAAAJ';
-const version = '20260916-cornell';
-const updated = '2026-09-24';
+const version = '20261005-performance';
+const updated = '2026-10-05';
 const searchVerification = 'HO2lcfGB0txjI-IF2DABt29dFvfqq5JjdVegt3W-X1k';
 const person = {
   '@type':'Person', '@id':base+'/#person', name:'Tejas Ramdas', url:base+'/',
@@ -86,7 +86,13 @@ const researchFigures = {
     {file:'iconic-constitutions.png', width:2218, height:1188, caption:'Genetic search for reference constitutions, balancing originality and coverage. Illustrative, not estimated results.'}
   ]
 };
-const paperFigures = (p) => (researchFigures[p.id] || []).map(figure=>`<figure class="paper-visual"><a href="assets/${figure.file}" aria-label="View full-size figure for ${esc(p.title)}" title="Open full-size figure" data-track="view_figure" data-track-target="${p.id}"><img src="assets/${figure.file}" width="${figure.width}" height="${figure.height}" alt="${esc(figure.caption)}" loading="lazy" decoding="async"></a><figcaption>${esc(figure.caption)}</figcaption></figure>`).join('');
+const responsiveSource = (file, width, sizes) => {
+  const stem = file.replace(/\.[^.]+$/, '');
+  const widths = [...new Set([640, 960, 1600].map(size => Math.min(size, width)))];
+  return `<source type="image/webp" srcset="${widths.map(size => `assets/${stem}-${size}.webp ${size}w`).join(', ')}" sizes="${sizes}">`;
+};
+const panelImageSizes = '(max-width: 700px) calc(100vw - 40px), (max-width: 800px) calc(100vw - 56px), (max-width: 960px) calc((100vw - 96px) / 2), (max-width: 1200px) calc((100vw - 144px) / 2), 528px';
+const paperFigures = (p) => (researchFigures[p.id] || []).map(figure=>`<figure class="paper-visual"><a href="assets/${figure.file}" aria-label="View full-size figure for ${esc(p.title)}" title="Open full-size figure" data-track="view_figure" data-track-target="${p.id}"><picture>${responsiveSource(figure.file,figure.width,panelImageSizes)}<img src="assets/${figure.file}" width="${figure.width}" height="${figure.height}" alt="${esc(figure.caption)}" loading="lazy" decoding="async"></picture></a><figcaption>${esc(figure.caption)}</figcaption></figure>`).join('');
 
 const education = [
   ['2026 (expected December)', 'Ph.D. in Statistics', 'Cornell University', 'Advisor: Martin T. Wells'],
@@ -149,9 +155,9 @@ ${file === 'index.html' ? `  <meta name="google-site-verification" content="${se
   <meta property="og:image:alt" content="Tejas Ramdas">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Libre+Baskerville:wght@400;700&amp;display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="preload" href="assets/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/libre-baskerville-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css?v=${version}">
   <script src="navigation.js?v=${version}" defer></script>
   <script src="script.js?v=${version}" defer></script>
@@ -193,7 +199,7 @@ page('index.html', 'Tejas Ramdas | Cornell Strategy & Statistics Research', 'Tej
 <section class="profile container" aria-labelledby="name">
   <div class="profile-title"><div><p class="eyebrow">${linkedText('Cornell University')}</p><h1 id="name">Tejas Ramdas</h1></div><p class="disciplines">Strategy &middot; Organization theory &middot; Statistics</p></div>
   <div class="profile-grid">
-    <div><figure class="portrait"><img src="assets/tejas-ramdas-portrait-wide.jpg" alt="Portrait of Tejas Ramdas" width="1200" height="800" fetchpriority="high"><figcaption class="portrait-caption"><strong>${linkedText('Cornell University')}</strong><br>${linkedText('S.C. Johnson College of Business')}<br>${linkedText('Statistics and Data Science')}</figcaption></figure><div class="profile-links">${link('mailto:tr336@cornell.edu','Email','profile_email','mail')}${link('cv.html','Curriculum vitae','profile_cv','right')}${link(cornellSite,'Cornell website','profile_cornell')}${link(scholarProfile,'Google Scholar','profile_scholar')}${link('profiles-and-papers.html','Profiles','profile_links')}</div></div>
+    <div><figure class="portrait"><picture>${responsiveSource('tejas-ramdas-portrait-wide.jpg',1200,'(max-width: 480px) calc(100vw - 40px), (max-width: 700px) 440px, (max-width: 960px) 36vw, 422px')}<img src="assets/tejas-ramdas-portrait-wide.jpg" alt="Portrait of Tejas Ramdas" width="1200" height="800" fetchpriority="high"></picture><figcaption class="portrait-caption"><strong>${linkedText('Cornell University')}</strong><br>${linkedText('S.C. Johnson College of Business')}<br>${linkedText('Statistics and Data Science')}</figcaption></figure><div class="profile-links">${link('mailto:tr336@cornell.edu','Email','profile_email','mail')}${link('cv.html','Curriculum vitae','profile_cv','right')}${link(cornellSite,'Cornell website','profile_cornell')}${link(scholarProfile,'Google Scholar','profile_scholar')}${link('profiles-and-papers.html','Profiles','profile_links')}</div></div>
     <div class="bio"><p class="credentials"><strong>Ph.D. in Management</strong>, ${linkedText('Cornell University')}, August 2026<br><strong>Ph.D. candidate in Statistics</strong>, expected December 2026</p>
     <p class="lead">I study how firms compete through innovation search, and how technological breakthroughs change the possibilities for invention.</p>
     <p>My research examines how firms move into new areas of invention and shape the opportunities available to other firms. I also study coordination and common knowledge in collectives of AI agents.</p>
@@ -217,7 +223,8 @@ function paperRow(p, heading = 'h3') {
 page('research.html','Research | Tejas Ramdas | Cornell','Management and Statistics research by Tejas Ramdas: generative inventions, search incursions, AI collectives, explainable AI, finance, and constitutional text.',intro('Research','Research',`<p class="lead">Two research programs: management and statistics.</p><nav class="research-jumps" aria-label="Research programs">${researchPanels.map(panel=>link('#'+panel.id,panel.title,'research_'+panel.id,'right')).join('')}</nav>`)+`<div class="container research-panels research-directory">${researchPanels.map(panel=>`<section class="research-panel" id="${panel.id}" aria-labelledby="${panel.id}-title"><header class="panel-heading"><h2 id="${panel.id}-title">${panel.title}</h2><p>${panel.description}</p></header>${researchGroups.filter(([id])=>panel.groups.includes(id)).map(([id,label])=>`<section class="research-subgroup"${id!==panel.id?` id="${id}"`:''}><h3 class="subgroup-title">${label}</h3>${papers.filter(p=>p.group===id).map(p=>paperRow(p,'h4')).join('')}</section>`).join('')}</section>`).join('')}</div>`,'Research');
 
 for (const p of featured) {
-  page(p.id+'.html',p.short+' | Tejas Ramdas',p.summary,`<section class="page-intro"><div class="container paper-heading"><div class="back-link">${link('research.html','All research','','left')}</div><p class="eyebrow">${p.status}</p><h1>${p.title}</h1><p class="authors">${linkedText(p.authors)}</p></div></section><article class="container reading"><h2>Overview</h2><p class="lead">${p.summary}</p><p>${esc(p.abstract)}</p><h2>The study</h2><p>${esc(p.detail)}</p><figure class="research-figure"><a href="assets/${p.figure}" aria-label="View full-size research figure" data-track="view_figure" data-track-target="${p.id}"><img src="assets/${p.figure}" alt="${esc(p.caption)}" loading="lazy"></a><figcaption>${p.caption}</figcaption></figure><div class="topic-list">${link('research.html','All research','','right')}${link('cv.html','Curriculum vitae','','right')}</div></article>`,'Research',{'@context':'https://schema.org','@type':'ScholarlyArticle',headline:p.title,author:p.authors.split(' and ').map(name=>({'@type':'Person',name,...(peopleLinks.has(name)?{url:peopleLinks.get(name)}:{})})),description:p.abstract,url:base+'/'+p.id+'.html',creativeWorkStatus:'Working paper',isPartOf:{'@type':'WebSite',name:'Tejas Ramdas',url:base}});
+  const figure = researchFigures[p.id][0];
+  page(p.id+'.html',p.short+' | Tejas Ramdas',p.summary,`<section class="page-intro"><div class="container paper-heading"><div class="back-link">${link('research.html','All research','','left')}</div><p class="eyebrow">${p.status}</p><h1>${p.title}</h1><p class="authors">${linkedText(p.authors)}</p></div></section><article class="container reading"><h2>Overview</h2><p class="lead">${p.summary}</p><p>${esc(p.abstract)}</p><h2>The study</h2><p>${esc(p.detail)}</p><figure class="research-figure"><a href="assets/${p.figure}" aria-label="View full-size research figure" data-track="view_figure" data-track-target="${p.id}"><picture>${responsiveSource(p.figure,figure.width,'(max-width: 700px) calc(100vw - 40px), (max-width: 876px) calc(100vw - 56px), 820px')}<img src="assets/${p.figure}" width="${figure.width}" height="${figure.height}" alt="${esc(p.caption)}" loading="lazy" decoding="async"></picture></a><figcaption>${p.caption}</figcaption></figure><div class="topic-list">${link('research.html','All research','','right')}${link('cv.html','Curriculum vitae','','right')}</div></article>`,'Research',{'@context':'https://schema.org','@type':'ScholarlyArticle',headline:p.title,author:p.authors.split(' and ').map(name=>({'@type':'Person',name,...(peopleLinks.has(name)?{url:peopleLinks.get(name)}:{})})),description:p.abstract,url:base+'/'+p.id+'.html',creativeWorkStatus:'Working paper',isPartOf:{'@type':'WebSite',name:'Tejas Ramdas',url:base}});
 }
 
 const courseTable = (level) => `<table class="course-table"><thead><tr><th scope="col">Course</th><th scope="col">Title</th></tr></thead><tbody>${courses.filter(c=>c[0]===level).map(c=>`<tr><td>${c[1]}</td><td>${c[2]}</td></tr>`).join('')}</tbody></table>`;

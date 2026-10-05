@@ -26,6 +26,15 @@ The September 2026 revision uses the August 2026 CV and September application st
 
 Colors use Cornell red (`#b31b1b`), charcoal, white, and neutral gray. Icons are from Lucide under the license in `assets/lucide-LICENSE`.
 
+## Performance
+
+Run `python optimize-images.py` (Pillow required) when replacing a research figure
+or portrait, then rebuild the site. It creates responsive WebP derivatives without
+cropping or changing the original images. Full-size figure links still open the
+original PNGs. Inter and Libre Baskerville are served locally with their OFL
+licenses in `assets/`; font preloads and optional font display prevent late swaps.
+The early `js` class keeps the mobile navigation from collapsing after first paint.
+
 ## Analytics Logger
 
 The `worker/` folder contains a Cloudflare Worker + D1 event logger. `script.js` points to the deployed `/collect` endpoint. Local previews do not send analytics events. The existing privacy notice remains linked from every page. Worker credentials are ignored by Git and must never be published.

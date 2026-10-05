@@ -25,10 +25,16 @@ class Page(HTMLParser):
         self.in_title = False
         self.in_schema = False
         self.schema_text = ""
+        self.images = []
+        self.source_sets = []
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if tag == "img":
+            self.images.append(attrs)
+        if tag == "source" and "srcset" in attrs:
+            self.source_sets.append(attrs)
         if tag == "title":
             self.in_title = True
         if tag == "meta":
@@ -76,6 +82,15 @@ for filename, page in pages.items():
     assert page.meta["og:url"] == url, filename
     assert page.h1 == 1, filename
     assert len(page.ids) == len(set(page.ids)), filename
+    for image in page.images:
+        assert image.get("width") and image.get("height"), (filename, image)
+        assert image.get("alt"), (filename, image)
+    for source in page.source_sets:
+        assert source.get("sizes"), (filename, source)
+        for candidate in source["srcset"].split(","):
+            path, width = candidate.strip().split()
+            assert width.endswith("w") and int(width[:-1]) > 0
+            assert (ROOT / path).is_file(), (filename, path)
     graph = page.schemas[0]["@graph"]
     person = next(n for n in graph if n["@type"] == "Person")
     assert person["name"] == "Tejas Ramdas"
@@ -109,4 +124,5 @@ assert "Sitemap: " + BASE + "sitemap.xml" in (ROOT / "robots.txt").read_text()
 assert "Disallow: /" not in (ROOT / "robots.txt").read_text()
 print(json.dumps({"pages": len(pages), "local_links_checked": links_checked,
                   "canonical_urls": "pass", "structured_data": "pass",
-                  "sitemap": "pass", "verification_tag": "present"}))
+                  "sitemap": "pass", "responsive_images": "pass",
+                  "verification_tag": "present"}))
