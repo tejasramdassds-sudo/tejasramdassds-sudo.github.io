@@ -78,7 +78,7 @@ for filename, page in pages.items():
     urls.add(url)
     assert page.canonicals == [url], filename
     assert page.meta["description"].strip(), filename
-    assert "noindex" not in page.meta["robots"], filename
+    assert "noindex" in page.meta["robots"], filename
     assert page.meta["og:url"] == url, filename
     assert page.h1 == 1, filename
     assert len(page.ids) == len(set(page.ids)), filename
@@ -126,7 +126,7 @@ ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
 entries = sitemap.findall("s:url", ns)
 assert {e.find("s:loc", ns).text for e in entries} == urls
 assert len(entries) == len(urls)
-assert "Sitemap: " + BASE + "sitemap.xml" in (ROOT / "robots.txt").read_text()
+assert "Sitemap:" not in (ROOT / "robots.txt").read_text()
 assert "Disallow: /" not in (ROOT / "robots.txt").read_text()
 print(json.dumps({"pages": len(pages), "local_links_checked": links_checked,
                   "canonical_urls": "pass", "structured_data": "pass",

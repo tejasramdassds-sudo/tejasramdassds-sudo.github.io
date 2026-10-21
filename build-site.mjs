@@ -142,7 +142,7 @@ function page(file, title, description, content, active = '', schema = null) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="${esc(description)}">
   <meta name="author" content="Tejas Ramdas">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="noindex, follow">
 ${file === 'index.html' ? `  <meta name="google-site-verification" content="${searchVerification}">` : ''}
   <meta name="theme-color" content="#b31b1b">
   <title>${esc(title)}</title>
