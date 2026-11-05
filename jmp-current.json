@@ -1,0 +1,123 @@
+{
+  "title": "Search Incursions: A Relational Theory of Disequilibrating Inventions and Recombinant Advantage",
+  "short": "Search Incursions",
+  "abstract": "Each novel invention can be viewed as a recombination of existing knowledge elements. By bridging previously less connected elements, an invention changes what constitutes “local” knowledge for firms and reshapes the interfirm matrix of search costs. These changes can enable firms to enter the established inventive territories of other firms; an event we call a search incursion. For each invention (I), we theorize how each firm's position in the technological knowledge network, relative to the invention and other firms, shapes its opportunities to undertake incursions and its exposure to incursions by others. To test our theory, for each focal invention, we reconstructed the technological network of U.S. patents granted during the preceding fifteen years, then introduced the invention and its citations to prior patents, holding the existing knowledge network and firms' prior knowledge positions fixed. Modeling firms as purposeful but error-prone searchers on this network, we formulated each firm’s search as a Markov decision process, and employed policy iteration to estimate how the invention changed the minimum expected cost of searching from each firm's knowledge position toward that of every other eligible firm. Calculating the invention-induced changes in the interfirm search-cost matrix allowed us to estimate the relative recombinant advantage conferred by the invention upon each firm. Separately, we used patent text and synthetic-patent constructions to identify subsequent search incursions, finding support for our predictions concerning which firms undertook incursions, which firms became susceptible to them, and which particular firm-to-firm incursions materialized.",
+  "summary": "How does a new invention redistribute firms' opportunities to enter one another's inventive territories, and their exposure to incursions by others?",
+  "detail": "We reconstruct fifteen-year patent-citation networks and model purposeful but error-prone inventive search as a Markov decision process. Policy iteration estimates invention-induced changes in directed interfirm search costs. These changes identify recombinant opportunity, exposure, and relative recombinant advantage; patent text and synthetic-patent constructions identify subsequent search incursions.",
+  "pdf": "assets/Search_Incursions_Ramdas_Ahuja_2026.pdf",
+  "date": "2026-11-05",
+  "figures": [
+    {
+      "file": "search-incursions-figure-01.png",
+      "width": 1429,
+      "height": 947,
+      "caption": "Figure 1. One invention, different strategic consequences: Shizuoka Seiki and Combustion Research",
+      "page": 6
+    },
+    {
+      "file": "search-incursions-figure-02.png",
+      "width": 1430,
+      "height": 805,
+      "caption": "Figure 2. Firms’ prior inventive positions in the technological knowledge network",
+      "page": 12
+    },
+    {
+      "file": "search-incursions-figure-03.png",
+      "width": 1430,
+      "height": 805,
+      "caption": "Figure 3. An external invention changes the overall cost structure of inventive search",
+      "page": 14
+    },
+    {
+      "file": "search-incursions-figure-04.png",
+      "width": 1430,
+      "height": 1126,
+      "caption": "Figure 4. One invention, four different firm positions",
+      "page": 16
+    },
+    {
+      "file": "search-incursions-figure-05.png",
+      "width": 1423,
+      "height": 1403,
+      "caption": "Figure 5. Changes in recombinant opportunity and exposure following US Patent 4,709,917",
+      "page": 18
+    },
+    {
+      "file": "search-incursions-figure-06.png",
+      "width": 1566,
+      "height": 1099,
+      "caption": "Figure 6. Destination-specific recombinant advantage",
+      "page": 62
+    },
+    {
+      "file": "search-incursions-figure-07.png",
+      "width": 1566,
+      "height": 646,
+      "caption": "Figure 7. Influential-invention classifications across the composite ranking",
+      "page": 63
+    },
+    {
+      "file": "search-incursions-figure-08.png",
+      "width": 1566,
+      "height": 928,
+      "caption": "Figure 8. Technological diversity of an invention’s backward citations",
+      "page": 64
+    },
+    {
+      "file": "search-incursions-figure-09.png",
+      "width": 1566,
+      "height": 705,
+      "caption": "Figure 9. Search-incursion scores and the classification threshold",
+      "page": 65
+    },
+    {
+      "file": "search-incursions-figure-10.png",
+      "width": 1566,
+      "height": 1277,
+      "caption": "Figure 10. Examples of the search-incursion classification",
+      "page": 66
+    },
+    {
+      "file": "search-incursions-figure-11.png",
+      "width": 1566,
+      "height": 1323,
+      "caption": "Figure 11. Patent-network intervention and directed search measures",
+      "page": 67
+    },
+    {
+      "file": "search-incursions-figure-12.png",
+      "width": 1566,
+      "height": 1191,
+      "caption": "Figure 12. Changes in recombinant opportunity and exposure",
+      "page": 68
+    },
+    {
+      "file": "search-incursions-figure-13.png",
+      "width": 1566,
+      "height": 759,
+      "caption": "Figure 13. Relative recombinant advantage and firms’ incursion roles",
+      "page": 69
+    },
+    {
+      "file": "search-incursions-figure-14.png",
+      "width": 1566,
+      "height": 1122,
+      "caption": "Figure 14. Destination-specific recombinant advantage and target selection",
+      "page": 70
+    },
+    {
+      "file": "search-incursions-figure-15.png",
+      "width": 1566,
+      "height": 949,
+      "caption": "Figure 15. Probability contrasts from the component regressions",
+      "page": 71
+    },
+    {
+      "file": "search-incursions-figure-16.png",
+      "width": 1566,
+      "height": 893,
+      "caption": "Figure 16. Grouped feature importance in the XGBoost models",
+      "page": 72
+    }
+  ]
+}

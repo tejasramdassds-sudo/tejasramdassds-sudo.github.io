@@ -86,13 +86,19 @@ const researchFigures = {
     {file:'iconic-constitutions.png', width:2218, height:1188, caption:'Genetic search for reference constitutions, balancing originality and coverage. Illustrative, not estimated results.'}
   ]
 };
+const currentJmp = JSON.parse(readFileSync(join(root, 'jmp-current.json'), 'utf8'));
+Object.assign(papers[0], currentJmp, {
+  figure: currentJmp.figures[0].file,
+  caption: currentJmp.figures[0].caption
+});
+researchFigures['generative-inventions'] = [currentJmp.figures[0], currentJmp.figures[12]];
 const responsiveSource = (file, width, sizes) => {
   const stem = file.replace(/\.[^.]+$/, '');
   const widths = [...new Set([640, 960, 1600].map(size => Math.min(size, width)))];
   return `<source type="image/webp" srcset="${widths.map(size => `assets/${stem}-${size}.webp ${size}w`).join(', ')}" sizes="${sizes}">`;
 };
 const panelImageSizes = '(max-width: 700px) calc(100vw - 40px), (max-width: 800px) calc(100vw - 56px), (max-width: 960px) calc((100vw - 96px) / 2), (max-width: 1200px) calc((100vw - 144px) / 2), 528px';
-const paperFigures = (p) => (researchFigures[p.id] || []).map(figure=>`<figure class="paper-visual"><a href="assets/${figure.file}" aria-label="View full-size figure for ${esc(p.title)}" title="Open full-size figure" data-track="view_figure" data-track-target="${p.id}"><picture>${responsiveSource(figure.file,figure.width,panelImageSizes)}<img src="assets/${figure.file}" width="${figure.width}" height="${figure.height}" alt="${esc(figure.caption)}" loading="lazy" decoding="async"></picture></a><figcaption>${esc(figure.caption)}</figcaption></figure>`).join('');
+const paperFigures = (p) => (researchFigures[p.id] || []).map(figure=>`<figure class="paper-visual"><a href="assets/${figure.file}" aria-label="View full-size figure for ${esc(p.title)}" title="Open full-size figure" data-track="view_figure" data-track-target="${p.id}"><picture>${responsiveSource(figure.file,figure.width,panelImageSizes)}<img src="assets/${figure.file}" width="${figure.width}" height="${figure.height}" alt="${esc(figure.caption)}" loading="lazy" decoding="async"></picture></a><figcaption>${esc(figure.caption)}</figcaption></figure>`).join('') + (p.pdf ? `<div class="inline-actions">${link(p.pdf,'Read paper (PDF)','jmp_pdf','download')}</div>` : '');
 
 const education = [
   ['2026 (expected December)', 'Ph.D. in Statistics', 'Cornell University', 'Advisor: Martin T. Wells'],
@@ -223,6 +229,14 @@ function paperRow(p, heading = 'h3') {
 page('research.html','Research | Tejas Ramdas | Cornell','Management and Statistics research by Tejas Ramdas: generative inventions, search incursions, AI collectives, explainable AI, finance, and constitutional text.',intro('Research','Research',`<p class="lead">Two research programs: management and statistics.</p><nav class="research-jumps" aria-label="Research programs">${researchPanels.map(panel=>link('#'+panel.id,panel.title,'research_'+panel.id,'right')).join('')}</nav>`)+`<div class="container research-panels research-directory">${researchPanels.map(panel=>`<section class="research-panel" id="${panel.id}" aria-labelledby="${panel.id}-title"><header class="panel-heading"><h2 id="${panel.id}-title">${panel.title}</h2><p>${panel.description}</p></header>${researchGroups.filter(([id])=>panel.groups.includes(id)).map(([id,label])=>`<section class="research-subgroup"${id!==panel.id?` id="${id}"`:''}><h3 class="subgroup-title">${label}</h3>${papers.filter(p=>p.group===id).map(p=>paperRow(p,'h4')).join('')}</section>`).join('')}</section>`).join('')}</div>`,'Research');
 
 for (const p of featured) {
+  if (p.id === 'generative-inventions') {
+    const figures = currentJmp.figures.map(figure => `<figure class="research-figure"><a href="assets/${figure.file}" aria-label="View full-size ${esc(figure.caption)}" data-track="view_figure" data-track-target="jmp_figure_${figure.page}"><picture>${responsiveSource(figure.file,figure.width,'(max-width: 876px) calc(100vw - 40px), 820px')}<img src="assets/${figure.file}" width="${figure.width}" height="${figure.height}" alt="${esc(figure.caption)}" loading="lazy" decoding="async"></picture></a><figcaption>${esc(figure.caption)}. ${link(p.pdf+'#page='+figure.page,'View in manuscript','','right')}</figcaption></figure>`).join('');
+    page(p.id+'.html', p.title+' | Tejas Ramdas', p.summary,
+      intro('Job market paper',esc(p.title),`<p class="authors">${linkedText(p.authors)}</p><div class="inline-actions">${link(p.pdf,'Read paper (PDF)','jmp_pdf','download','button')}<span>Revised November 2026</span></div>`)
+      + `<article class="container reading"><h2>Abstract</h2><p>${esc(p.abstract)}</p><h2>The study</h2><p>${esc(p.detail)}</p><h2>Figures</h2>${figures}<div class="topic-list">${link('research.html','All research','','left')}${link('cv.html','Curriculum vitae','','right')}</div></article>`,
+      'Research', {'@context':'https://schema.org','@type':'ScholarlyArticle',headline:p.title,author:p.authors.split(' and ').map(name=>({'@type':'Person',name})),description:p.abstract,url:base+'/'+p.id+'.html',encoding:{'@type':'MediaObject',contentUrl:base+'/'+p.pdf,encodingFormat:'application/pdf'},dateModified:p.date});
+    continue;
+  }
   const figure = researchFigures[p.id][0];
   page(p.id+'.html',p.short+' | Tejas Ramdas',p.summary,`<section class="page-intro"><div class="container paper-heading"><div class="back-link">${link('research.html','All research','','left')}</div><p class="eyebrow">${p.status}</p><h1>${p.title}</h1><p class="authors">${linkedText(p.authors)}</p></div></section><article class="container reading"><h2>Overview</h2><p class="lead">${p.summary}</p><p>${esc(p.abstract)}</p><h2>The study</h2><p>${esc(p.detail)}</p><figure class="research-figure"><a href="assets/${p.figure}" aria-label="View full-size research figure" data-track="view_figure" data-track-target="${p.id}"><picture>${responsiveSource(p.figure,figure.width,'(max-width: 700px) calc(100vw - 40px), (max-width: 876px) calc(100vw - 56px), 820px')}<img src="assets/${p.figure}" width="${figure.width}" height="${figure.height}" alt="${esc(p.caption)}" loading="lazy" decoding="async"></picture></a><figcaption>${p.caption}</figcaption></figure><div class="topic-list">${link('research.html','All research','','right')}${link('cv.html','Curriculum vitae','','right')}</div></article>`,'Research',{'@context':'https://schema.org','@type':'ScholarlyArticle',headline:p.title,author:p.authors.split(' and ').map(name=>({'@type':'Person',name,...(peopleLinks.has(name)?{url:peopleLinks.get(name)}:{})})),description:p.abstract,url:base+'/'+p.id+'.html',creativeWorkStatus:'Working paper',isPartOf:{'@type':'WebSite',name:'Tejas Ramdas',url:base}});
 }
