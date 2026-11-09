@@ -98,8 +98,7 @@ const responsiveSource = (file, width, sizes) => {
   return `<source type="image/webp" srcset="${widths.map(size => `assets/${stem}-${size}.webp ${size}w`).join(', ')}" sizes="${sizes}">`;
 };
 const panelImageSizes = '(max-width: 700px) calc(100vw - 40px), (max-width: 800px) calc(100vw - 56px), (max-width: 960px) calc((100vw - 96px) / 2), (max-width: 1200px) calc((100vw - 144px) / 2), 528px';
-const jmpSlides = 'assets/Search_Incursions_Job_Market_Slides.pdf';
-const paperFigures = (p) => (researchFigures[p.id] || []).map(figure=>`<figure class="paper-visual"><a href="assets/${figure.file}" aria-label="View full-size figure for ${esc(p.title)}" title="Open full-size figure" data-track="view_figure" data-track-target="${p.id}"><picture>${responsiveSource(figure.file,figure.width,panelImageSizes)}<img src="assets/${figure.file}" width="${figure.width}" height="${figure.height}" alt="${esc(figure.caption)}" loading="lazy" decoding="async"></picture></a><figcaption>${esc(figure.caption)}</figcaption></figure>`).join('') + (p.pdf ? `<div class="inline-actions">${link(p.pdf,'Read paper (PDF)','jmp_pdf','download')}${p.id === 'generative-inventions' ? link(jmpSlides,'Job-market slides (PDF)','jmp_slides','download') : ''}</div>` : '');
+const paperFigures = (p) => (researchFigures[p.id] || []).map(figure=>`<figure class="paper-visual"><a href="assets/${figure.file}" aria-label="View full-size figure for ${esc(p.title)}" title="Open full-size figure" data-track="view_figure" data-track-target="${p.id}"><picture>${responsiveSource(figure.file,figure.width,panelImageSizes)}<img src="assets/${figure.file}" width="${figure.width}" height="${figure.height}" alt="${esc(figure.caption)}" loading="lazy" decoding="async"></picture></a><figcaption>${esc(figure.caption)}</figcaption></figure>`).join('');
 
 const education = [
   ['2026 (expected December)', 'Ph.D. in Statistics', 'Cornell University', 'Advisor: Martin T. Wells'],
@@ -231,11 +230,11 @@ page('research.html','Research | Tejas Ramdas | Cornell','Management and Statist
 
 for (const p of featured) {
   if (p.id === 'generative-inventions') {
-    const figures = currentJmp.figures.map(figure => `<figure class="research-figure"><a href="assets/${figure.file}" aria-label="View full-size ${esc(figure.caption)}" data-track="view_figure" data-track-target="jmp_figure_${figure.page}"><picture>${responsiveSource(figure.file,figure.width,'(max-width: 876px) calc(100vw - 40px), 820px')}<img src="assets/${figure.file}" width="${figure.width}" height="${figure.height}" alt="${esc(figure.caption)}" loading="lazy" decoding="async"></picture></a><figcaption>${esc(figure.caption)}. ${link(p.pdf+'#page='+figure.page,'View in manuscript','','right')}</figcaption></figure>`).join('');
+    const figures = currentJmp.figures.map(figure => `<figure class="research-figure"><a href="assets/${figure.file}" aria-label="View full-size ${esc(figure.caption)}" data-track="view_figure" data-track-target="jmp_figure_${figure.page}"><picture>${responsiveSource(figure.file,figure.width,'(max-width: 876px) calc(100vw - 40px), 820px')}<img src="assets/${figure.file}" width="${figure.width}" height="${figure.height}" alt="${esc(figure.caption)}" loading="lazy" decoding="async"></picture></a><figcaption>${esc(figure.caption)}.</figcaption></figure>`).join('');
     page(p.id+'.html', p.title+' | Tejas Ramdas', p.summary,
-      intro('Job market paper',esc(p.title),`<p class="authors">${linkedText(p.authors)}</p><div class="inline-actions">${link(p.pdf,'Read paper (PDF)','jmp_pdf','download','button')}${link(jmpSlides,'Job-market slides (PDF)','jmp_slides','download')}<span>Revised November 2026</span></div>`)
+      intro('Job market paper',esc(p.title),`<p class="authors">${linkedText(p.authors)}</p><div class="inline-actions"><span>Revised November 2026</span></div>`)
       + `<article class="container reading"><h2>Abstract</h2><p>${esc(p.abstract)}</p><h2>The study</h2><p>${esc(p.detail)}</p><h2>Figures</h2>${figures}<div class="topic-list">${link('research.html','All research','','left')}${link('cv.html','Curriculum vitae','','right')}</div></article>`,
-      'Research', {'@context':'https://schema.org','@type':'ScholarlyArticle',headline:p.title,author:p.authors.split(' and ').map(name=>({'@type':'Person',name})),description:p.abstract,url:base+'/'+p.id+'.html',encoding:{'@type':'MediaObject',contentUrl:base+'/'+p.pdf,encodingFormat:'application/pdf'},dateModified:p.date});
+      'Research', {'@context':'https://schema.org','@type':'ScholarlyArticle',headline:p.title,author:p.authors.split(' and ').map(name=>({'@type':'Person',name})),description:p.abstract,url:base+'/'+p.id+'.html',dateModified:p.date});
     continue;
   }
   const figure = researchFigures[p.id][0];
